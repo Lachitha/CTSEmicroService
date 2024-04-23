@@ -11,7 +11,7 @@ const start = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
     console.log('Connected to MongoDb');
   } catch (err) {
     console.error(err);
