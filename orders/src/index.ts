@@ -10,9 +10,9 @@ const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
-  if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI must be defined');
-  }
+  // if (!process.env.MONGO_URI) {
+  //   throw new Error('MONGO_URI must be defined');
+  // }
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error('NATS_CLIENT_ID must be defined');
   }
@@ -40,7 +40,7 @@ const start = async () => {
     new TicketUpdatedListener(natsWrapper.client).listen();
     new ExpirationCompleteListener(natsWrapper.client).listen();
     new PaymentCreatedListener(natsWrapper.client).listen();
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
     console.log('Connected to MongoDb');
   } catch (err) {
     console.error(err);
